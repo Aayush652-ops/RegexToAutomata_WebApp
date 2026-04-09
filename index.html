@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regex to Automaton Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Regular Expression to Automaton Converter</h1>
+    <p class="intro">
+      Build an ε-NFA from a regular expression using Thompson's construction,
+      step through the construction, convert the final ε-NFA to a DFA, and
+      simulate input strings on both machines.
+    </p>
+
+    <div class="panel">
+      <div class="row">
+        <input id="regexInput" type="text" placeholder="Enter regex, e.g. a(b|c)*a" value="a(b|c)*a" />
+        <button id="buildBtn">Build ε-NFA</button>
+        <button id="nextBtn" disabled title="Go to next construction step">
+  Next Step
+</button>
+
+<button id="playBtn" disabled title="Automatically run all steps">
+  Play
+</button>
+        <button id="resetBtn" disabled>Reset</button>
+        <button id="convertBtn" disabled>Convert to DFA</button>
+      </div>
+     
+      <div class="row">
+        <input id="stringInput" type="text" placeholder="Input string to simulate" />
+        <button id="simulateNfaBtn" disabled>Simulate ε-NFA</button>
+        <button id="simulateDfaBtn" disabled>Simulate DFA</button>
+      </div>
+
+      <div class="meta-grid">
+        <div><span class="label">Regex with concat:</span> <span id="concatView">-</span></div>
+        <div><span class="label">Postfix:</span> <span id="postfixView">-</span></div>
+        <div><span class="label">Current view:</span> <span id="machineView">ε-NFA</span></div>
+        <div><span class="label">Result:</span> <span id="resultView">-</span></div>
+      </div>
+
+      <div id="stepDescription" class="step-description">Enter a regex and click Build ε-NFA.</div>
+    </div>
+      <div class="guide">
+    <h3>🧠 Regex Syntax Guide</h3>
+    <ul>
+      <li><b>a</b> → single character</li>
+      <li><b>ab</b> → concatenation</li>
+      <li><b>a|b</b> → union</li>
+      <li><b>a*</b> → zero or more a</li>
+      <li><b>(a|b)</b> → grouping</li>
+      <li><b>a(b|c)*a</b> → mixed expression</li>
+    </ul> 
+
+    <h3>⚡ Click an Example</h3>
+    <div class="examples">
+      <button class="ex-btn" onclick="loadExample('a')">a</button>
+      <button class="ex-btn" onclick="loadExample('ab')">ab</button>
+      <button class="ex-btn" onclick="loadExample('a|b')">a|b</button>
+      <button class="ex-btn" onclick="loadExample('a*')">a*</button>
+      <button class="ex-btn" onclick="loadExample('(a|b)*')">(a|b)*</button>
+      <button class="ex-btn" onclick="loadExample('a(b|c)*a')">a(b|c)*a</button>
+    </div>
+  </div>
+
+
+    <div class="legend">
+      <span><span class="dot start"></span> Start</span>
+      <span><span class="dot accept"></span> Accept</span>
+      <span><span class="dot normal"></span> Normal</span>
+      <span><span class="dot highlight"></span> New/Highlighted step</span>
+    </div>
+
+    <div id="canvasWrap" class="canvas-wrap">
+      <svg id="graphSvg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
